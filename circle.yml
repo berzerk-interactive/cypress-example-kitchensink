@@ -72,30 +72,30 @@ workflows:
     jobs:
       - win-test
 
-  mac-build:
-    jobs:
-      - cypress/install:
-          name: "Mac install"
-          executor: mac
-          # and builds the app using this command
-          build: "npm run build"
-          post-steps:
-            # show Cypress cache folder and binary versions
-            # to check if we are caching previous binary versions
-            - run: npx cypress cache path
-            - run: npx cypress cache list
-            - run: npx cypress info
-
-      - cypress/run:
-          name: Mac test
-          executor: mac
-          requires:
-            - Mac install
-          record: false
-          parallel: true
-          parallelism: 2
-          start: "npm run start:ci"
-          group: "Mac build"
+  # mac-build:
+  #   jobs:
+  #     - cypress/install:
+  #         name: "Mac install"
+  #         executor: mac
+  #         # and builds the app using this command
+  #         build: "npm run build"
+  #         post-steps:
+  #           # show Cypress cache folder and binary versions
+  #           # to check if we are caching previous binary versions
+  #           - run: npx cypress cache path
+  #           - run: npx cypress cache list
+  #           - run: npx cypress info
+  #
+  #     - cypress/run:
+  #         name: Mac test
+  #         executor: mac
+  #         requires:
+  #           - Mac install
+  #         record: false
+  #         parallel: true
+  #         parallelism: 2
+  #         start: "npm run start:ci"
+  #         group: "Mac build"
 
   linux-build:
     jobs:
